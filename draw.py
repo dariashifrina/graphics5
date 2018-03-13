@@ -12,17 +12,14 @@ def add_circle( points, cx, cy, cz, r, step ):
         t += step * 100
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    if (curve_type == "hermite"):
-        
-    else:
-        bezier_matrix = [[-1,3,-3,1], [3,-6,3,0], [-3,3,0,0], [1,0,0,0]]
-        x_matrix = [[x0], [x1], [x2], [x3]]
-        y_matrix = [[y0], [y1], [y2], y3]]
-        matrix_mult(bezier_matrix, x_matrix)
-        matrix_mult(bezier_matrix, y_matrix)
-        #U*DFHDJKFHSDJK FIGURE THIS OUT OMG
-                                                       
-    pass
+    t = 0
+    while t < 100:
+        xcoefs_matrix = generate_curve_coefs(x0, x1, x2, x3, curve_type)
+        ycoefs_matrix = generate_curve_coefs(y0, y1, y2, y3, curve_type)
+        x = (xcoefs_matrix[0][0] * ((t/100) ** 3)) + (xcoefs_matrix[0][1] * ((t/100) ** 2)) + (xcoefs_matrix[0][2] * ((t/100))) + (xcoefs_matrix[0][3])
+        y = (ycoefs_matrix[0][0] * ((t/100) ** 3)) + (ycoefs_matrix[0][1] * ((t/100) ** 2)) + (ycoefs_matrix[0][2] * ((t/100))) + (ycoefs_matrix[0][3])
+        add_point(points, x, y, 0)
+        t += step * 100
 
 
 
